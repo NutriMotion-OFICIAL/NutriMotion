@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="es" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planes - NutriMotion</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            box-sizing: border-box;
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 50%;
+            background-color: #4a5568;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+            left: 0;
+        }
+        
+        .nav-link.active::after {
+            width: 100%;
+            left: 0;
+        }
+        
+        .mobile-menu {
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+        
+        .plan-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .plan-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        
+        .plan-popular {
+            position: relative;
+            border: 2px solid #059669;
+        }
+        
+        .plan-popular::before {
+            content: 'MÁS POPULAR';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #059669, #047857);
+            color: white;
+            padding: 6px 20px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+        }
+        
+        .feature-check {
+            color: #059669;
+            font-weight: bold;
+        }
+        
+        .feature-cross {
+            color: #dc2626;
+        }
+        
+        .price-highlight {
+            background: linear-gradient(135deg, #059669, #047857);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #059669, #047857);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #047857, #065f46);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(5, 150, 105, 0.3);
+        }
+        
+        .btn-secondary {
+            border: 2px solid #059669;
+            color: #059669;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background: #059669;
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .btn-outline {
+            border: 2px solid #6b7280;
+            color: #6b7280;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-outline:hover {
+            background: #6b7280;
+            color: white;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body class="h-full bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <img src="https://drive.google.com/uc?export=view&id=1Gr2TJrtTJjme1g5vGSLQ208s7LGsO7dX" alt="NutriMotion Logo" class="w-12 h-12 rounded-lg object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="w-12 h-12 bg-gradient-to-r from-gray-700 to-gray-900 rounded-lg flex items-center justify-center" style="display: none;">
+                            <span class="text-white font-bold text-xl">N</span>
+                        </div>
+                        <span class="ml-3 text-2xl font-bold text-gray-800">NutriMotion</span>
+                    </div>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="index.html" class="nav-link text-gray-700 hover:text-gray-900 px-3 py-2 text-sm font-medium">Inicio</a>
+                        <a href="Entrenamientos.html" class="nav-link text-gray-700 hover:text-gray-900 px-3 py-2 text-sm font-medium">Entrenamientos</a>
+                        <a href="Nutricion.html" class="nav-link text-gray-700 hover:text-gray-900 px-3 py-2 text-sm font-medium">Nutrición</a>
+                        <a href="Planes.html" class="nav-link active text-gray-900 px-3 py-2 text-sm font-medium">Planes</a>
+                        <a href="Nosotros.html" class="nav-link text-gray-700 hover:text-gray-900 px-3 py-2 text-sm font-medium">Nosotros</a>
+                        <a href="Contacto.html" class="nav-link text-gray-700 hover:text-gray-900 px-3 py-2 text-sm font-medium">Contacto</a>
+                    </div>
+                </div>
+                
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-gray-700 hover:text-gray-900 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="mobile-menu md:hidden fixed inset-y-0 left-0 w-64 bg-white shadow-lg z-50">
+            <div class="p-4">
+                <div class="flex items-center justify-between mb-8">
+                    <span class="text-xl font-bold text-gray-800">NutriMotion</span>
+                    <button id="close-menu-btn" class="text-gray-700 hover:text-gray-900">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                <div class="space-y-4">
+                    <a href="index.html" class="block text-gray-700 hover:text-gray-900 py-2 text-lg font-medium mobile-nav-link">Inicio</a>
+                    <a href="Entrenamientos.html" class="block text-gray-700 hover:text-gray-900 py-2 text-lg font-medium mobile-nav-link">Entrenamientos</a>
+                    <a href="Nutricion.html" class="block text-gray-700 hover:text-gray-900 py-2 text-lg font-medium mobile-nav-link">Nutrición</a>
+                    <a href="Planes.html" class="block text-gray-900 py-2 text-lg font-medium mobile-nav-link">Planes</a>
+                    <a href="Nosotros.html" class="block text-gray-700 hover:text-gray-900 py-2 text-lg font-medium mobile-nav-link">Nosotros</a>
+                    <a href="Contacto.html" class="block text-gray-700 hover:text-gray-900 py-2 text-lg font-medium mobile-nav-link">Contacto</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="pt-16">
+        <!-- Header Section -->
+        <section class="bg-gradient-to-r from-green-600 to-green-800 text-white py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center">
+                    <h1 class="text-4xl md:text-5xl font-bold mb-6">Planes de Entrenamiento</h1>
+                    <p class="text-xl text-green-100 max-w-3xl mx-auto mb-8">
+                        Elige el plan que mejor se adapte a tus objetivos y presupuesto. Desde acceso básico hasta asesoría personalizada completa.
+                    </p>
+                    <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-8">
+                        <div class="flex items-center space-x-2">
+                            <svg class="w-5 h-5 text-green-200" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span class="text-green-100">Sin compromisos a largo plazo</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <svg class="w-5 h-5 text-green-200" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span class="text-green-100">Cancela cuando quieras</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <svg class="w-5 h-5 text-green-200" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span class="text-green-100">Soporte 24/7</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Plans Section -->
+        <section class="py-20 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
+                    
+                    <!-- Plan Básico -->
+                    <div class="plan-card bg-white rounded-2xl shadow-lg p-8 relative">
+                        <div class="text-center mb-8">
+                            <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <svg class="w-8 h-8 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-2xl font-bold text-gray-800 mb-2">Plan Básico</h3>
+                            <p class="text-gray-600 mb-6">Perfecto para comenzar tu transformación</p>
+                            <div class="mb-6">
+                                <span class="text-4xl font-bold price-highlight">GRATIS</span>
+                                <p class="text-gray-500 text-sm mt-1">Para siempre</p>
+                            </div>
+                        </div>
+
+                        <div class="space-y-4 mb-8">
+                            <div class="flex items-center space-x-3">
+                                <span class="feature-check text-xl">✓</span>
+                                <span class="text-gray-700">Acceso a rutinas básicas</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <span class="feature-check text-xl">✓</span>
+                                <span class="text-gray-700">Calculadora nutricional</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <span class="feature-check text-xl">✓</span>
+                                <span class="text-gray-700">Tips de nutrición generales</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <span class="feature-check text-xl">✓</span>
+                                <span class="text-gray-700">Seguimiento básico de progreso</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <span class="feature-check text-xl">✓</span>
+                                <span class="text-gray-700">Comunidad online</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <span class="feature-cross text-xl">✗</span>
+                                <span class="text-gray-400">Asesoría personalizada</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <span class="feature-cross text-xl">✗</span>
+                                <span class="text-gray-400">Planes de alimentación personalizados</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <span class="feature-cross text-xl">✗</span>
+                                <span class="text-gray-400">Seguimiento intensivo</span>
+                            </div>
+                        </div>
+
+                        <button class="btn-outline w-full py-3 px-6 rounded-lg font-semibold">
+                            Comenzar Gratis
+                        </button>
+                    </div>
+
+                    <!-- Plan Intermedio -->
+                    <div class="plan-card plan-popular bg-white rounded-2xl shadow-xl p-8 relative">
+                        <div class="text-center mb-8">
+                            <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-2xl font-bold text-gray-800 mb-2">Plan Intermedio</h3>
+                            <p class="text-gray-600 mb-6">Asesoría personalizada para mejores resultados</p>
+                            <div class="mb-6">
+                                <span class="text-4xl font-bold price-highlight">100</span>
+                                <span class="text-xl font-semibold text-gray-600">Bs</span>
+                                <p class="text-gray-500 text-sm mt-1">por mes</p>
+                            </div>
+                        </div>
+
+                        <div class="space-y-4 mb-8">
+                            <div class="flex items-center space-x-3">
+                                <span class="feature-check text-xl">✓</span>
+                                <span class="text-gray-700">Todo del Plan Básico</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <span class="feature-check text-xl">✓</span>
+                                <span class="text-gray-700"><strong>Asesoría personalizada en ejercicios</strong></span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <span class="feature-check text-xl">✓</span>
+                                <span class="text-gray-700"><strong>Plan de alimentación personalizado</strong></span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <span class="feature-check text-xl">✓</span>
+                                <span class="text-gray-700">Rutinas adaptadas a tu nivel</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <span class="feature-check text-xl">✓</span>
+                                <span class="text-gray-700">Consultas mensuales por chat</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <span class="feature-check text-xl">✓</span>
+                                <span class="text-gray-700">Ajustes según tu progreso</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <span class="feature-check text-xl">✓</span>
+                                <span class="text-gray-700">Soporte prioritario</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <span class="feature-cross text-xl">✗</span>
+                                <span class="text-gray-400">Reuniones presenciales</span>
+                            </div>
+                        </div>
+
+                        <button class="btn-primary w-full py-3 px-6 rounded-lg font-semibold text-white">
+                            Elegir Plan Intermedio
+                        </button>
+                    </div>
+
+                    <!-- Plan Avanzado -->
+                    <div class="plan-card bg-white rounded-2xl shadow-lg p-8 relative">
+                        <div class="text-center mb-8">
+                            <div class="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <svg class="w-8 h-8 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-2xl font-bold text-gray-800 mb-2">Plan Avanzado</h3>
+                            <p class="text-gray-600 mb-6">Seguimiento intensivo y entrenamiento presencial</p>
+                            <div class="mb-6">
+                                <span class="text-4xl font-bold price-highlight">225</span>
+                                <span class="text-xl font-semibold text-gray-600">Bs</span>
+                                <p class="text-gray-500 text-sm mt-1">por mes</p>
+                            </div>
+                        </div>
+
+                        <div class="space-y-4 mb-8">
+                            <div class="flex items-center space-x-3">
+                                <span class="feature-check text-xl">✓</span>
+                                <span class="text-gray-700">Todo del Plan Intermedio</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <span class="feature-check text-xl">✓</span>
+                                <span class="text-gray-700"><strong>Seguimiento intensivo muscular</strong></span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <span class="feature-check text-xl">✓</span>
+                                <span class="text-gray-700"><strong>Seguimiento nutricional detallado</strong></span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <span class="feature-check text-xl">✓</span>
+                                <span class="text-gray-700"><strong>Reuniones presenciales semanales</strong></span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <span class="feature-check text-xl">✓</span>
+                                <span class="text-gray-700"><strong>Entrenador personal especializado</strong></span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <span class="feature-check text-xl">✓</span>
+                                <span class="text-gray-700">Análisis corporal mensual</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <span class="feature-check text-xl">✓</span>
+                                <span class="text-gray-700">Ajustes semanales de rutina</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <span class="feature-check text-xl">✓</span>
+                                <span class="text-gray-700">Soporte 24/7 prioritario</span>
+                            </div>
+                        </div>
+
+                        <button class="btn-secondary w-full py-3 px-6 rounded-lg font-semibold">
+                            Elegir Plan Avanzado
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Comparison Table -->
+                <div class="mt-20">
+                    <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">Comparación Detallada de Planes</h2>
+                    
+                    <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+                        <div class="overflow-x-auto">
+                            <table class="w-full">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th class="px-6 py-4 text-left text-sm font-semibold text-gray-900">Características</th>
+                                        <th class="px-6 py-4 text-center text-sm font-semibold text-gray-900">Básico</th>
+                                        <th class="px-6 py-4 text-center text-sm font-semibold text-gray-900 bg-green-50">Intermedio</th>
+                                        <th class="px-6 py-4 text-center text-sm font-semibold text-gray-900">Avanzado</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-200">
+                                    <tr>
+                                        <td class="px-6 py-4 text-sm text-gray-900 font-medium">Rutinas de ejercicio</td>
+                                        <td class="px-6 py-4 text-center text-green-600">✓ Básicas</td>
+                                        <td class="px-6 py-4 text-center text-green-600 bg-green-50">✓ Personalizadas</td>
+                                        <td class="px-6 py-4 text-center text-green-600">✓ Especializadas</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 text-sm text-gray-900 font-medium">Calculadora nutricional</td>
+                                        <td class="px-6 py-4 text-center text-green-600">✓</td>
+                                        <td class="px-6 py-4 text-center text-green-600 bg-green-50">✓</td>
+                                        <td class="px-6 py-4 text-center text-green-600">✓</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 text-sm text-gray-900 font-medium">Plan de alimentación personalizado</td>
+                                        <td class="px-6 py-4 text-center text-red-600">✗</td>
+                                        <td class="px-6 py-4 text-center text-green-600 bg-green-50">✓</td>
+                                        <td class="px-6 py-4 text-center text-green-600">✓ Detallado</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 text-sm text-gray-900 font-medium">Asesoría personalizada</td>
+                                        <td class="px-6 py-4 text-center text-red-600">✗</td>
+                                        <td class="px-6 py-4 text-center text-green-600 bg-green-50">✓ Mensual</td>
+                                        <td class="px-6 py-4 text-center text-green-600">✓ Semanal</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 text-sm text-gray-900 font-medium">Seguimiento de progreso</td>
+                                        <td class="px-6 py-4 text-center text-green-600">✓ Básico</td>
+                                        <td class="px-6 py-4 text-center text-green-600 bg-green-50">✓ Avanzado</td>
+                                        <td class="px-6 py-4 text-center text-green-600">✓ Intensivo</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 text-sm text-gray-900 font-medium">Reuniones presenciales</td>
+                                        <td class="px-6 py-4 text-center text-red-600">✗</td>
+                                        <td class="px-6 py-4 text-center text-red-600 bg-green-50">✗</td>
+                                        <td class="px-6 py-4 text-center text-green-600">✓ Semanales</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 text-sm text-gray-900 font-medium">Entrenador especializado</td>
+                                        <td class="px-6 py-4 text-center text-red-600">✗</td>
+                                        <td class="px-6 py-4 text-center text-red-600 bg-green-50">✗</td>
+                                        <td class="px-6 py-4 text-center text-green-600">✓</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 text-sm text-gray-900 font-medium">Soporte</td>
+                                        <td class="px-6 py-4 text-center text-green-600">✓ Estándar</td>
+                                        <td class="px-6 py-4 text-center text-green-600 bg-green-50">✓ Prioritario</td>
+                                        <td class="px-6 py-4 text-center text-green-600">✓ 24/7 VIP</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ Section -->
+                <div class="mt-20">
+                    <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">Preguntas Frecuentes</h2>
+                    
+                    <div class="max-w-4xl mx-auto space-y-6">
+                        <div class="bg-white rounded-lg shadow-md p-6">
+                            <h3 class="text-lg font-semibold text-gray-800 mb-3">¿Puedo cambiar de plan en cualquier momento?</h3>
+                            <p class="text-gray-600">Sí, puedes actualizar o degradar tu plan en cualquier momento. Los cambios se aplicarán en tu próximo ciclo de facturación.</p>
+                        </div>
+                        
+                        <div class="bg-white rounded-lg shadow-md p-6">
+                            <h3 class="text-lg font-semibold text-gray-800 mb-3">¿Hay compromiso de permanencia?</h3>
+                            <p class="text-gray-600">No, todos nuestros planes son mensuales sin compromiso. Puedes cancelar cuando quieras sin penalizaciones.</p>
+                        </div>
+                        
+                        <div class="bg-white rounded-lg shadow-md p-6">
+                            <h3 class="text-lg font-semibold text-gray-800 mb-3">¿Qué incluyen las reuniones presenciales?</h3>
+                            <p class="text-gray-600">Las reuniones presenciales del Plan Avanzado incluyen evaluación física, corrección de técnica, ajuste de rutinas y seguimiento personalizado con tu entrenador especializado.</p>
+                        </div>
+                        
+                        <div class="bg-white rounded-lg shadow-md p-6">
+                            <h3 class="text-lg font-semibold text-gray-800 mb-3">¿Cómo funciona la asesoría personalizada?</h3>
+                            <p class="text-gray-600">La asesoría personalizada se realiza a través de consultas por chat, videollamadas programadas y análisis de tu progreso para ajustar tu plan de ejercicios y alimentación.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CTA Section -->
+                <div class="mt-20 bg-gradient-to-r from-green-600 to-green-800 rounded-2xl p-12 text-center">
+                    <h2 class="text-3xl font-bold text-white mb-4">¿Listo para comenzar tu transformación?</h2>
+                    <p class="text-xl text-green-100 mb-8 max-w-2xl mx-auto">
+                        Únete a miles de personas que ya han logrado sus objetivos con NutriMotion. Comienza hoy mismo.
+                    </p>
+                    <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                        <button class="bg-white text-green-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+                            Comenzar Gratis
+                        </button>
+                        <button class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-green-600 transition-colors">
+                            Hablar con un Asesor
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Mobile menu functionality
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const closeMenuBtn = document.getElementById('close-menu-btn');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.add('active');
+        });
+
+        closeMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+        });
+
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+            });
+        });
+
+        // Plan selection functionality
+        const planButtons = document.querySelectorAll('button[class*="btn-"]');
+        
+        planButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const planName = this.textContent.trim();
+                
+                // Create a simple modal-like message
+                const message = document.createElement('div');
+                message.className = 'fixed top-4 right-4 bg-green-600 text-white px-6 py-4 rounded-lg shadow-lg z-50 transform transition-transform duration-300';
+                message.innerHTML = `
+                    <div class="flex items-center space-x-3">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <span>¡Excelente elección! Procesando ${planName}...</span>
+                    </div>
+                `;
+                
+                document.body.appendChild(message);
+                
+                // Remove message after 3 seconds
+                setTimeout(() => {
+                    message.style.transform = 'translateX(100%)';
+                    setTimeout(() => {
+                        document.body.removeChild(message);
+                    }, 300);
+                }, 3000);
+            });
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98f778c95723d76a',t:'MTc2MDYxNjgyMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
